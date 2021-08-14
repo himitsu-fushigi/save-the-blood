@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/Images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.savetheblood.app"
     },
     "web": {
       "favicon": "./assets/Images/favicon.png"

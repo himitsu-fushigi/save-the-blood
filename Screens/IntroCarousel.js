@@ -1,80 +1,102 @@
 import React from "react";
 import {
-  Text,
-  Dimensions,
-  StyleSheet,
   View,
+  StyleSheet,
+  Dimensions,
+  Text,
+  StatusBar,
+  SafeAreaView,
   Image,
-  TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
-import { SwiperFlatList } from "react-native-swiper-flatlist";
+import Swiper from "react-native-web-swiper";
 
-export default function IntroCarousel() {
+const windowWidth = Dimensions.get('window').width;
+
+export default function IntroCarousel({ navigation }) {
   return (
-    <View style={styles.container}>
-      <SwiperFlatList index={0} showPagination>
-        <View style={styles.child}>
-          <Image
-            source={require("../assets/Images/introOne.jpg")}
-            style={styles.carouselImage}
-          />
-          <Text style={styles.introText}>Community Driven</Text>
+    <SafeAreaView style={styles.container}>
+      <Swiper
+        controlsProps={{
+          prevPos: false,
+          nextPos: false
+        }}
+        style={styles.slideContainer}
+      >
+        <View>
+          <Image style={styles.swiperImages} source={require('../assets/Images/introOne.png')}/>
+          <Text style={styles.swiperText}>Community Driven</Text>
+          <Text style={styles.supportText}>
+            Our ecosystem fully depends on the community of our users. Now, the community is you.
+          </Text>
         </View>
-        <View style={styles.child}>
-          <Image
-            source={require("../assets/Images/introTwo.jpg")}
-            style={styles.carouselImage}
-          />
-          <Text style={styles.introText}>24 Hour Care & Support</Text>
+        <View>
+          <Image style={styles.swiperImage} source={require('../assets/Images/introTwo.png')}/>
+          <Text style={styles.swiperText}>24/7 Support & Care</Text>
+          <Text style={styles.supportText}>
+            We're always ready to support in need of users. We love to care Anytime, Anyhow, & Anywhere.
+          </Text>
         </View>
-        <View style={styles.child}>
-          <Image
-            source={require("../assets/Images/introThree.jpg")}
-            style={styles.carouselImage}
-          />
-          <Text style={styles.introText}>Decentralized & Secure</Text>
+        <View>
+          <Image style={styles.swiperImage} source={require('../assets/Images/introThree.png')}/>
+          <Text style={styles.swiperText}>Decentralized Censorship</Text>
+          <Text style={styles.supportText}>
+          We're not controlled by a single authority or a person. We and our data are completely safe.
+          </Text>
         </View>
-      </SwiperFlatList>
+      </Swiper>
 
-      <TouchableHighlight style={styles.getStartedBtn}>
-        <Text style={styles.btnText}>Get Started</Text>
-      </TouchableHighlight>
-    </View>
+      <TouchableOpacity style={styles.getStartedBtn} onPress={() => navigation.navigate('language-selector')}>
+        <Text style={styles.getStartedText}>GET STARTED</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 }
 
-const { width } = Dimensions.get("window");
-
 const styles = StyleSheet.create({
   container: {
+    marginTop: Platform.OS === "android" ? StatusBar.statusBarHeight : 0,
+    width: Dimensions.get("window").width,
     flex: 1,
-    backgroundColor: "white",
-    display: "flex",
-    justifyContent: "space-between",
-    marginVertical: 30,
+    backgroundColor: "#fff",
+    paddingVertical: Dimensions.get("window").height * 0.04
   },
-  child: { width, justifyContent: "center" },
-  carouselImage: { width: 350, height: 350, alignSelf: "center" },
-  introText: {
-    textAlign: "center",
-    fontSize: 22,
-    fontWeight: "700",
-    marginTop: 10,
-    fontFamily: "biryani-bold"
+  slideContainer: {
+    flex: 1,
   },
   getStartedBtn: {
-    width: "85%",
-    alignSelf: "center",
-    backgroundColor: "black",
-    paddingVertical: 18,
-    borderRadius: 5
+    backgroundColor: "#000",
+    paddingVertical: 20,
+    marginHorizontal: 25
   },
-  btnText: {
+  getStartedText: {
     color: "#fff",
     textAlign: "center",
-    fontSize: 17,
-    textTransform: 'uppercase',
-    fontWeight: "500",
-    fontFamily: "biryani-bold"
+    fontWeight: "600"
   },
+  swiperImages: {
+    marginTop: Dimensions.get('window').height * 0.18,
+    alignSelf: "center",
+    width: windowWidth * 0.8,
+    height: windowWidth * 0.8
+  },
+  swiperImage: {
+    marginTop: Dimensions.get('window').height * 0.20,
+    alignSelf: "center",
+    width: windowWidth * 0.72,
+    height: windowWidth * 0.72,
+    marginBottom: 20
+  },
+  swiperText: {
+    textAlign: "center",
+    fontSize: 25,
+    fontWeight: "700"
+  },
+  supportText: {
+    textAlign: 'center',
+    paddingHorizontal: 40,
+    fontSize: 17,
+    color: "#5a5a5a",
+    marginTop: 10,
+  }
 });

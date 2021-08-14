@@ -10,6 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 // @dev components
 import IntroCarousel from "./Screens/IntroCarousel";
+import LanguageSelector from "./Screens/LanguageSelector";
 
 const UnRegisteredUserStack = createStackNavigator();
 
@@ -30,7 +31,10 @@ export default function App() {
         <UnRegisteredUserStack.Screen
           name="intro"
           component={IntroCarousel}
-          options={{ title: "Welcome" }}
+        />
+        <UnRegisteredUserStack.Screen
+          name="language-selector"
+          component={LanguageSelector}
         />
       </UnRegisteredUserStack.Navigator>
     </NavigationContainer>
